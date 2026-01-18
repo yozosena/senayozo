@@ -9,17 +9,20 @@
 
   <ul id="post-list"></ul>
 
-  <script>
-    fetch("posts/posts.json")
-      .then(response => response.json())
-      .then(posts => {
-        const list = document.getElementById("post-list");
-        posts.forEach(post => {
-          const li = document.createElement("li");
-          li.innerHTML = `<a href="posts/${post.url}">${post.title}</a>（${post.date}）`;
-          list.appendChild(li);
-        });
-      });
-  </script>
+<script>
+fetch("posts/posts.json?" + Date.now())
+  .then(r => r.text())
+  .then(t => JSON.parse(t.trim()))
+  .then(posts => {
+    const list = document.getElementById("post-list");
+    posts.forEach(post => {
+      const li = document.createElement("li");
+      li.innerHTML = `<a href="posts/${post.url}">${post.title}</a>（${post.date}）`;
+      list.appendChild(li);
+    });
+  });
+</script>
+
+  
 </body>
 </html>
